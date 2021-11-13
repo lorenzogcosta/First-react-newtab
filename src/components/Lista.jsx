@@ -24,7 +24,8 @@ export default class Lista extends Component {
         const users = this.state.data
 
         return (
-            <div className="containerList">{users.map((user) =>
+            <div >{users.map((user) =>
+                <div className="containerList" >
                 <p className="usersList">
                     <p className="containerImg"><div className="idUser"><strong > ID:</strong>{user.id}</div><img className="img" src={user.img} alt="" />
                         <div className="userName"><strong> {user.username} </strong></div>
@@ -35,7 +36,9 @@ export default class Lista extends Component {
                     <div className="divButton">
                         <button className="button">Pagar</button>
                     </div>
-                </p>)}
+                </p>
+                </div>)}
+                
             </div>
         )
 

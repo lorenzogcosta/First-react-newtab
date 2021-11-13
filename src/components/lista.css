@@ -35,6 +35,10 @@ body{
 
 .containerList{
     background-color: rgb(5, 126, 15);
+    width: auto;
+    border: #34e7ffb4;
+    border-style: solid;
+    border-radius: 20px;
     
 }
 
@@ -63,4 +67,21 @@ body{
     display: flex;
     margin-left: 50px;
     align-items: center;
+}
+
+@media screen and (max-width: 414px) {
+
+    .usersList{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .h2{
+        margin: 0 0 1vh 0;
+    }
+
+    .divButton{
+        margin: 0 20px 10px 20px;
+    }
+
 }
