@@ -82,6 +82,8 @@ body{
 
     .divButton{
         margin: 0 20px 10px 20px;
+        min-width: 110px
+;
     }
 
 }
