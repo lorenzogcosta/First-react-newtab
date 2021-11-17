@@ -31,7 +31,7 @@ export default class Lista extends Component {
                         <div className="userName"><strong> {user.username} </strong></div>
                     </p>
 
-                    <h2 className="h2"> NOME: {user.name}</h2>
+                    <p className="h2"> NOME: {user.name}</p>
 
                     <div className="divButton">
                         <button className="button">Pagar</button>
