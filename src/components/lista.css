@@ -134,6 +134,19 @@ body{
         background-color: blueviolet;
     }
 
+    
+    .modalD{
+        position: fixed;
+        top: 5px;
+        left: 10%;
+        margin: auto;
+        width: 80%;
+        justify-content: center;
+        color: aquamarine;
+        
+        background-color: red;
+    }
+
 @media screen and (max-width: 414px) {
 
     .usersList{

@@ -6,12 +6,30 @@ export default class Lista extends Component {
     state = {
         data: [],
         modalopen: (false),
-        modalA: (true),
-        modalD: (false)
+        modalA: (false),
+        modalD: (false),
+        indexCartao: "",
+        cards: [
+            // valid card
+            {
+                card_number: '1111111111111111',
+                cvv: 789,
+                expiry_date: '01/18',
+            },
+            // invalid card
+            {
+                card_number: '4111111111111234',
+                cvv: 123,
+                expiry_date: '01/20',
+            },
+        ]
     }
 
 
     async componentDidMount() {
+
+        this.handleChange = this.handleChange.bind(this);
+        this.validForm = this.validForm.bind(this);
 
         let bodyApi = this.state
 
@@ -27,6 +45,19 @@ export default class Lista extends Component {
 
         this.setState(bodyApi)
 
+
+    }
+
+    handleChange(event) {
+        console.log("event.target.value ", event.target.value)
+        
+        this.setState({ indexCartao: event.target.value });
+    }
+
+    openModal(user) {
+        console.log("USUARIO SELECIONADO ", user);
+
+        this.setState({ modalopen: true })
 
     }
 
@@ -60,11 +91,13 @@ export default class Lista extends Component {
 
     validForm() {
 
+        console.log("indexCartao ", this.state.indexCartao);
+        console.log("CARTAO SELECIONADO ", this.state.cards[this.state.indexCartao]);
 
         let worth = document.querySelector("#worthPayment").value;
         let spanError = document.querySelector(".spanError");
         let eventerror = false;
-        let modalReturn = document.getElementById('cards').value;
+        // let modalReturn = document.getElementById('cards').value;
 
 
 
@@ -78,30 +111,26 @@ export default class Lista extends Component {
 
         if (!eventerror) {
 
-            // fetch('https://run.mocky.io/v3/533cd5d7-63d3-4488-bf8d-4bb8c751c989', {
-            //     method: "POST",
+            if(this.state.indexCartao === '1'){
 
-            //     body: JSON.stringify({
+                this.setState({modalA: true})
 
-            //         "transacao": [
-            //             {
-            //                 "card_number": string,
-            //                 "cvv": number,
-            //                 "expiry_date": string,
-            //             }
-            //         ]
-            //     })
-            // }
-            // )
-
+            console.log('cartao ok')
             console.log(worth)
-            console.log(modalReturn)
+            // console.log(modalReturn)
+            }
+
+            if(this.state.indexCartao === '0'){
+
+                this.setState({modalD: true})
+                console.log('cartao failure')
+            }
 
         }
 
     }
 
-    
+
 
 
 
@@ -110,20 +139,6 @@ export default class Lista extends Component {
 
         const users = this.state.data
 
-        let cards = [
-            // valid card
-            {
-                card_number: '1111111111111111',
-                cvv: 789,
-                expiry_date: '01/18',
-            },
-            // invalid card
-            {
-                card_number: '4111111111111234',
-                cvv: 123,
-                expiry_date: '01/20',
-            },
-        ];
 
 
         return (
@@ -138,7 +153,7 @@ export default class Lista extends Component {
                             <p className="h2"> NOME: {user.name}</p>
 
                             <div className="divButton">
-                                <button onClick={() => this.setState({ modalopen: true })} className="button" >Pagar</button>
+                                <button onClick={() => this.openModal(user)} className="button" >Pagar</button>
                             </div>
                         </p>
                     </div>)}
@@ -151,7 +166,6 @@ export default class Lista extends Component {
 
                 </div>
                 <div style={{ display: this.state.modalopen ? "flex" : "none" }} className='cardsModal'>
-
                     <div className="inputPayment" >
                         <label htmlFor="worthPayment">Valor Do Pagamento</label><br />
                         <input onKeyPress={this.mask} id="worthPayment" type="text" placeholder="R$  DIGITE O VALOR" />
@@ -160,9 +174,9 @@ export default class Lista extends Component {
 
                     <div className="selectCard">
                         <label htmlFor="cardsLabel">Selecione o Cartao</label> <br />
-                        <select name="cardsPayment" id="cards">
-                            {cards.map((card) =>
-                                <option>{card.card_number}</option>)}
+                        <select onChange={this.handleChange} >
+                            {this.state.cards.map((card, i) =>
+                                <option value={i}> {card.card_number}</option>)}
                         </select><br />
                         <div>
 
@@ -177,6 +191,11 @@ export default class Lista extends Component {
                     Pagamento Realizado com Sucesso
                 </div>
 
+                {/* MODAL DE PAGAMENTO COM FALHA */}
+
+                <div className="modalD" style={{ display: this.state.modalD ? "flex" : "none" }} >
+                    Pagamento NAO Realizado
+                </div>
 
 
             </>
