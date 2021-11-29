@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import './lista.css'
+
+import axios from "axios";
 export default class Lista extends Component {
 
 
@@ -9,6 +11,8 @@ export default class Lista extends Component {
         modalA: (false),
         modalD: (false),
         indexCartao: "",
+        username: "",
+        userid: "",
         cards: [
             // valid card
             {
@@ -50,14 +54,16 @@ export default class Lista extends Component {
 
     handleChange(event) {
         console.log("event.target.value ", event.target.value)
-        
+
         this.setState({ indexCartao: event.target.value });
     }
+
 
     openModal(user) {
         console.log("USUARIO SELECIONADO ", user);
 
-        this.setState({ modalopen: true })
+        this.setState({ modalopen: true, username: user.name, userid: user.id })
+
 
     }
 
@@ -111,19 +117,39 @@ export default class Lista extends Component {
 
         if (!eventerror) {
 
-            if(this.state.indexCartao === '1'){
+            if (this.state.indexCartao === '1') {
 
-                this.setState({modalA: true})
+                this.setState({ modalA: true })
 
-            console.log('cartao ok')
-            console.log(worth)
-            // console.log(modalReturn)
+                console.log('cartao ok')
+                console.log(worth)
+
+                axios.post("https://run.mocky.io/v3/533cd5d7-63d3-4488-bf8d-4bb8c751c989",
+                    // Card Info
+                    {
+                        card: (this.indexCartao),
+
+                        // Destination User ID
+                        destination_user_id: (this.state.userid),
+
+                        // Value of the Transaction
+                        value: (worth),
+                    })
+                    .then(function (response) {
+                        console.log(response);
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+
+
+
             }
 
-            if(this.state.indexCartao === '0'){
+            if (this.state.indexCartao === '0') {
 
-                this.setState({modalD: true})
-                console.log('cartao failure')
+                this.setState({ modalD: true })
+
             }
 
         }
@@ -166,6 +192,7 @@ export default class Lista extends Component {
 
                 </div>
                 <div style={{ display: this.state.modalopen ? "flex" : "none" }} className='cardsModal'>
+                    <label style={{ color: "blueviolet" }}>Pagando {this.state.username}</label>
                     <div className="inputPayment" >
                         <label htmlFor="worthPayment">Valor Do Pagamento</label><br />
                         <input onKeyPress={this.mask} id="worthPayment" type="text" placeholder="R$  DIGITE O VALOR" />
