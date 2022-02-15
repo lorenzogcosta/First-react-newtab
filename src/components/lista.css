@@ -1,102 +1,94 @@
-body{
-    font-family: cursive,sans-serif;
+body {
+    font-family: cursive, sans-serif;
 }
 
-.usersList{
-    background-color: #34e7ffb4;
+.usersList {
+    background-color: #8A2BE2;
     display: flex;
     border-radius: 30px;
     justify-content: space-around;
-
-    
 }
 
-.containerImg{
+.containerImg {
     align-items: center;
     justify-content: right;
     margin: 10px;
 }
 
-.userName{
+.userName {
     margin-left: 5px;
 }
 
-.idUser{
+.idUser {
     justify-content: center;
-    margin-left: 35px
-;
+    margin-left: 35px;
+    color: white;
 }
 
-.img{
+strong {
+    color: white;
+}
+
+.img {
     border-radius: 50px;
     display: flex;
     margin: auto;
 }
 
-.containerList{
-    background-color: rgb(5, 126, 15);
+.containerList {
+    background-color: #4B0082;
     width: auto;
-    border: #34e7ffb4;
+    border: #8A2BE2;
     border-style: solid;
     border-radius: 20px;
-    
 }
 
-.h2{
-   align-self: center;
-   color: rgb(32, 38, 32);
-   font-size: x-large;
+.h2 {
+    align-self: center;
+    color: white;
+    font-size: x-large;
 }
 
-.button{
-
-    background-color: green;
-    color:aquamarine;
+.button {
+    background-color: white;
     border-radius: 50px;
     height: 14vh;
     width: 14vw;
     font-size: x-large;
 }
 
-.button:hover{
+.button:hover {
     cursor: pointer;
     height: 16vh;
     width: 16vw;
-
 }
 
-.second_button{
-
-    background-color: green;
-    color: rgb(255, 255, 255);
-    border-radius: 50px;
-    height: 14vh;
+.second_button {
+    background-color: white;
+    border-radius: 10px;
+    height: auto;
     width: 90%;
     margin-top: 2vh;
     font-size: larger;
-    color: aquamarine;
-
-
+    position: inherit;
 }
 
-.second_button:hover{
+.second_button:hover {
     cursor: pointer;
-    width: 100% ;
-    height: 15vh;
-
-
+    width: 100%;
+    background-color: #008000;
 }
 
-.divButton{
+.divButton {
     display: flex;
     margin-left: 50px;
     align-items: center;
 }
 
-.cardsModal{
+.cardsModal {
     border: 1px solid black;
-    background-color: aquamarine;
-    width: 40%;   
+    background-color: rgb(216, 204, 204);
+    width: 40%;
     position: fixed;
     left: 30vw;
     top: 21.5vh;
@@ -108,62 +100,64 @@ body{
     align-content: space-around;
     padding: 5px;
     border-radius: 10px;
-    color: rgb(3, 89, 3);
-    
-    }
+}
 
-    .backdrop{
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
-        top: 0;
-        left: 0;
-        
-    }
+.labelCardsModal {
+    color: blueviolet;
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid black;
+    justify-content: center;
+}
 
-    .modalA{
-        position: fixed;
-        top: 5px;
-        left: 10%;
-        margin: auto;
-        width: 80%;
-        justify-content: center;
-        color: aquamarine;
-        
-        background-color: blueviolet;
-    }
+.backdrop {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    top: 0;
+    left: 0;
+}
 
-    
-    .modalD{
-        position: fixed;
-        top: 5px;
-        left: 10%;
-        margin: auto;
-        width: 80%;
-        justify-content: center;
-        color: aquamarine;
-        
-        background-color: red;
-    }
+.modalA {
+    position: fixed;
+    top: 5px;
+    left: 10%;
+    margin: auto;
+    width: 80%;
+    justify-content: center;
+    color: white;
+    border-radius: 15px;
+    background-color: #008000;
+}
+
+.modalD {
+    position: fixed;
+    top: 5px;
+    left: 10%;
+    margin: auto;
+    color: white;
+    width: 80%;
+    justify-content: center;
+    border-radius: 15px;
+    background-color: red;
+}
 
 @media screen and (max-width: 414px) {
 
-    .usersList{
+    .usersList {
         display: flex;
         flex-wrap: wrap;
     }
 
-    .h2{
+    .h2 {
         margin: 0 0 1vh 0;
         display: flex;
         justify-content: center;
         width: 100%;
-        
-
     }
 
-    .divButton{
+    .divButton {
         min-width: 110px;
         margin: auto;
         justify-content: center;
@@ -171,12 +165,10 @@ body{
     }
 
     .button {
-        min-width: inherit ;
+        min-width: inherit;
     }
 
-    .cardsModal{
-
+    .cardsModal {
         min-width: fit-content;
     }
-    
 }

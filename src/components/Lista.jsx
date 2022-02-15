@@ -4,13 +4,12 @@ import './lista.css'
 import axios from "axios";
 export default class Lista extends Component {
 
-
     state = {
         data: [],
         modalopen: (false),
         modalA: (false),
         modalD: (false),
-        indexCartao: "",
+        indexCartao: "0",
         username: "",
         userid: "",
         cards: [
@@ -29,9 +28,11 @@ export default class Lista extends Component {
         ]
     }
 
+    // This Function Makes The Fetch at Api For Create The User`s List
 
     async componentDidMount() {
 
+        // functions with bind to keep then updated        
         this.handleChange = this.handleChange.bind(this);
         this.validForm = this.validForm.bind(this);
 
@@ -40,35 +41,22 @@ export default class Lista extends Component {
         const api = 'https://www.mocky.io/v2/5d531c4f2e0000620081ddce'
 
         const response = await fetch(api)
-        console.log(" res: ", response)
-
         const body = await response.json();
-        console.log("body:", body);
-
         bodyApi.data = body
-
         this.setState(bodyApi)
-
-
     }
 
+    // Get the Value choosen of card 1 or 2
     handleChange(event) {
-        console.log("event.target.value ", event.target.value)
-
         this.setState({ indexCartao: event.target.value });
     }
 
-
+    // Opens the User`s Modal With Data of the Selected User
     openModal(user) {
-        console.log("USUARIO SELECIONADO ", user);
-
         this.setState({ modalopen: true, username: user.name, userid: user.id })
-
-
     }
 
-
-
+    // monetary mask converting to BRL Currency
     mask() {
         document.querySelector(".spanError").innerHTML = "";
 
@@ -95,34 +83,27 @@ export default class Lista extends Component {
 
     }
 
+    // Valid The Form With The Informations Provided And Return Some Error If There`s any 
+    // Missing Field , If Fields Be Right, Return The Payment Sucess Modal Or Failed Payment Modal.
     validForm() {
-
-        console.log("indexCartao ", this.state.indexCartao);
-        console.log("CARTAO SELECIONADO ", this.state.cards[this.state.indexCartao]);
 
         let worth = document.querySelector("#worthPayment").value;
         let spanError = document.querySelector(".spanError");
         let eventerror = false;
-        // let modalReturn = document.getElementById('cards').value;
-
-
-
 
         if (worth === "") {
-
             eventerror = true;
             spanError.innerHTML = "Digite O Valor"
-
         }
 
         if (!eventerror) {
 
             if (this.state.indexCartao === '1') {
+                worth = worth.replace(".", "").replace(",", ".").toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 
+                worth = parseFloat(worth)
+                document.querySelector('#worthPayment').innerText = "R$ 0,00";
                 this.setState({ modalA: true })
-
-                console.log('cartao ok')
-                console.log(worth)
 
                 axios.post("https://run.mocky.io/v3/533cd5d7-63d3-4488-bf8d-4bb8c751c989",
                     // Card Info
@@ -136,36 +117,30 @@ export default class Lista extends Component {
                         value: (worth),
                     })
                     .then(function (response) {
-                        console.log(response);
                     })
                     .catch(function (error) {
                         console.error(error);
                     });
 
-
-
+                //After Payment Sucess , It Makes Payment Sucess Modal and Payment Modal Disappear. 
+                setTimeout(() => {
+                    this.setState({ modalA: false, modalopen: false })
+                }, 2000)
             }
 
             if (this.state.indexCartao === '0') {
+                this.setState({ modalD: true });
 
-                this.setState({ modalD: true })
-
+                // Makes The Payment Failed Disappear.
+                setTimeout(() => {
+                    this.setState({ modalD: false })
+                }, 2000)
             }
-
         }
-
     }
-
-
-
-
-
-
     render() {
 
         const users = this.state.data
-
-
 
         return (
             <>
@@ -175,24 +150,20 @@ export default class Lista extends Component {
                             <p className="containerImg"><div className="idUser"><strong > ID:</strong>{user.id}</div><img className="img" src={user.img} alt="" />
                                 <div className="userName"><strong> {user.username} </strong></div>
                             </p>
-
-                            <p className="h2"> NOME: {user.name}</p>
-
+                            <p className="h2"> Nome: {user.name}</p>
                             <div className="divButton">
                                 <button onClick={() => this.openModal(user)} className="button" >Pagar</button>
                             </div>
                         </p>
                     </div>)}
-
                 </div>
 
                 {/* MODAL DE SELECAO DE CARTOES */}
-
                 <div onClick={() => { this.setState({ modalopen: false, modalA: false, modalD: false }) }} style={{ display: this.state.modalopen ? "block" : "none" }} className="backdrop">
 
                 </div>
                 <div style={{ display: this.state.modalopen ? "flex" : "none" }} className='cardsModal'>
-                    <label style={{ color: "blueviolet" }}>Pagando {this.state.username}</label>
+                    <label className="labelCardsModal">Pagando: {this.state.username}</label>
                     <div className="inputPayment" >
                         <label htmlFor="worthPayment">Valor Do Pagamento</label><br />
                         <input onKeyPress={this.mask} id="worthPayment" type="text" placeholder="R$  DIGITE O VALOR" />
@@ -203,36 +174,24 @@ export default class Lista extends Component {
                         <label htmlFor="cardsLabel">Selecione o Cartao</label> <br />
                         <select onChange={this.handleChange} >
                             {this.state.cards.map((card, i) =>
-                                <option value={i}> {card.card_number}</option>)}
+                                <option value={i}> Cartao Com Final: {card.card_number.substr(-4)}</option>)}
                         </select><br />
                         <div>
-
                             <button onClick={this.validForm} className="second_button">Pagar</button>
                         </div>
                     </div>
-
                 </div>
-                {/* MODAL DE PAGAMENTO REALIZADO COM SUCESSO */}
 
+                {/* MODAL DE PAGAMENTO REALIZADO COM SUCESSO */}
                 <div className="modalA" style={{ display: this.state.modalA ? "flex" : "none" }} >
                     Pagamento Realizado com Sucesso
                 </div>
 
                 {/* MODAL DE PAGAMENTO COM FALHA */}
-
                 <div className="modalD" style={{ display: this.state.modalD ? "flex" : "none" }} >
                     Pagamento NAO Realizado
                 </div>
-
-
             </>
         )
-
-
-
     }
-
-
-
-
 }

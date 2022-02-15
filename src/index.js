@@ -3,18 +3,12 @@ import ReactDOM from "react-dom"
 import Lista from "./components/Lista"
 // import App from "./components/Lista"
 
-
-
-
-
 const rootComponent = document.getElementById("root")
 
 ReactDOM.render(
 
    <div>
-
       <Lista /> 
-
    </div>
 
    , rootComponent)
