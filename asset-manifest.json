@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/First-react-newtab/static/css/main.c9aa551a.chunk.css",
-    "main.js": "/First-react-newtab/static/js/main.cac93631.chunk.js",
-    "main.js.map": "/First-react-newtab/static/js/main.cac93631.chunk.js.map",
+    "main.css": "/First-react-newtab/static/css/main.4bf831c6.chunk.css",
+    "main.js": "/First-react-newtab/static/js/main.899b9d26.chunk.js",
+    "main.js.map": "/First-react-newtab/static/js/main.899b9d26.chunk.js.map",
     "runtime-main.js": "/First-react-newtab/static/js/runtime-main.177dd8d8.js",
     "runtime-main.js.map": "/First-react-newtab/static/js/runtime-main.177dd8d8.js.map",
     "static/js/2.c424618f.chunk.js": "/First-react-newtab/static/js/2.c424618f.chunk.js",
     "static/js/2.c424618f.chunk.js.map": "/First-react-newtab/static/js/2.c424618f.chunk.js.map",
     "index.html": "/First-react-newtab/index.html",
-    "static/css/main.c9aa551a.chunk.css.map": "/First-react-newtab/static/css/main.c9aa551a.chunk.css.map",
+    "static/css/main.4bf831c6.chunk.css.map": "/First-react-newtab/static/css/main.4bf831c6.chunk.css.map",
     "static/js/2.c424618f.chunk.js.LICENSE.txt": "/First-react-newtab/static/js/2.c424618f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.177dd8d8.js",
     "static/js/2.c424618f.chunk.js",
-    "static/css/main.c9aa551a.chunk.css",
-    "static/js/main.cac93631.chunk.js"
+    "static/css/main.4bf831c6.chunk.css",
+    "static/js/main.899b9d26.chunk.js"
   ]
 }
